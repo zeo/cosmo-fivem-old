@@ -1,6 +1,6 @@
 ﻿namespace Cosmo
 {
-    public struct ActionPayload<T>
+    public struct ActionPayload<T> where T : struct
     {
         public ulong OrderId { get; set; }
         public string PackageName { get; set; }

@@ -10,6 +10,6 @@ server_script 'Cosmo.net.dll'
 server_only 'yes'
 
 files {
-	'Newtonsoft.Json.Dll',
+	'Newtonsoft.Json.dll',
 	'config/config.json'
 }

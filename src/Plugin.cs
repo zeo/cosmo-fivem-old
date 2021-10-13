@@ -12,6 +12,8 @@ namespace Cosmo
     {
         private readonly Timer _timer;
 
+        public static Config Config { get; private set; }
+
         public Plugin()
         {
             _timer = new Timer(2000);
@@ -24,12 +26,18 @@ namespace Cosmo
 
         private void OnResourceStart(string resourceName)
         {
-            var curResource = API.GetCurrentResourceName();
-            if (curResource != resourceName) return;
+            if (API.GetCurrentResourceName() != resourceName) return;
 
-            var configRaw = API.LoadResourceFile(curResource, "config/config.json");
+            Config = LoadConfig();
+
+            Debug.WriteLine("Database password is: " + Config.Database.Password);
+        }
+
+        private static Config LoadConfig()
+        {
+            var configRaw = API.LoadResourceFile(API.GetCurrentResourceName(), "config/config.json");
             var config = Config.Default;
-            
+
             if (configRaw != null)
             {
                 try
@@ -41,11 +49,9 @@ namespace Cosmo
                     Debug.WriteLine("[Cosmo] [ERROR] Invalid config.json file, reverting to default.");
                     Debug.WriteLine($"[Cosmo] [ERROR] Details: {ex.Message}");
                 }
-
-                return;
             }
 
-            Debug.WriteLine("Database password is: " + config.Database.Password);
+            return config;
         }
 
         private void CheckPendingActions()

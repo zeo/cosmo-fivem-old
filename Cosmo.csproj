@@ -9,13 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="CitizenFX.Core">
-			<HintPath>D:\Game Servers\FiveM\server\citizen\clr2\lib\mono\4.5\CitizenFX.Core.dll</HintPath>
-		</Reference>
+	  <None Include=".github\workflows\build.yml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include=".github\workflows\build.yml" />
+	  <Folder Include="deps\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="CitizenFX.Core">
+	    <HintPath>deps\CitizenFX.Core.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

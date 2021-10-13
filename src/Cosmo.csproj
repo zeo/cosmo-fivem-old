@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net452</TargetFramework>
+		<DebugType>embedded</DebugType>
+		<RootNamespace>Cosmo</RootNamespace>
+		<AssemblyName>$(MSBuildProjectName).net</AssemblyName>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" />
+		<None Include="..\.gitignore"/>
+		<None Include="..\.gitattributes"/>
+		<None Include="..\fxmanifest.lua"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="..\deps\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="CitizenFX.Core">
+			<HintPath>..\deps\CitizenFX.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>..\deps\Newtonsoft.Json.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

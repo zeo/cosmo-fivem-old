@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmo", "Cosmo.csproj", "{BD889944-DD80-4AF1-9BD4-A913FD037BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmo", "src\Cosmo.csproj", "{0C55A7A9-4588-47AE-B52E-6CD7D6D96E24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BD889944-DD80-4AF1-9BD4-A913FD037BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD889944-DD80-4AF1-9BD4-A913FD037BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD889944-DD80-4AF1-9BD4-A913FD037BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD889944-DD80-4AF1-9BD4-A913FD037BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C55A7A9-4588-47AE-B52E-6CD7D6D96E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C55A7A9-4588-47AE-B52E-6CD7D6D96E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C55A7A9-4588-47AE-B52E-6CD7D6D96E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C55A7A9-4588-47AE-B52E-6CD7D6D96E24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

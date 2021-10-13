@@ -8,3 +8,8 @@ version '1.0.0'
 
 server_script 'Cosmo.net.dll'
 server_only 'yes'
+
+files {
+	'Newtonsoft.Json.Dll',
+	'config/config.json'
+}

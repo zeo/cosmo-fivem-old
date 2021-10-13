@@ -20,6 +20,9 @@
 	  <Reference Include="CitizenFX.Core">
 	    <HintPath>deps\CitizenFX.Core.dll</HintPath>
 	  </Reference>
+	  <Reference Include="Newtonsoft.Json">
+	    <HintPath>deps\Newtonsoft.Json.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

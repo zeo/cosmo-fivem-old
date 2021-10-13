@@ -4,6 +4,7 @@ using System;
 using System.Timers;
 using System.Linq;
 using Cosmo.Extensions;
+using Newtonsoft.Json;
 
 namespace Cosmo
 {
@@ -23,9 +24,28 @@ namespace Cosmo
 
         private void OnResourceStart(string resourceName)
         {
-            if (API.GetCurrentResourceName() != resourceName) return;
+            var curResource = API.GetCurrentResourceName();
+            if (curResource != resourceName) return;
 
-            Console.WriteLine("Started resource");
+            var configRaw = API.LoadResourceFile(curResource, "config/config.json");
+            var config = Config.Default;
+            
+            if (configRaw != null)
+            {
+                try
+                {
+                    config = JsonConvert.DeserializeObject<Config>(configRaw);
+                }
+                catch (JsonReaderException ex)
+                {
+                    Debug.WriteLine("[Cosmo] [ERROR] Invalid config.json file, reverting to default.");
+                    Debug.WriteLine($"[Cosmo] [ERROR] Details: {ex.Message}");
+                }
+
+                return;
+            }
+
+            Debug.WriteLine("Database password is: " + config.Database.Password);
         }
 
         private void CheckPendingActions()

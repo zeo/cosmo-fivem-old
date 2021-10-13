@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CitizenFX.Core;
+using Newtonsoft.Json;
 
 namespace Cosmo.Actions
 {
@@ -7,7 +8,10 @@ namespace Cosmo.Actions
     {
         public struct ConsoleCommandData
         {
+            [JsonProperty("cmd")]
             public string Command { get; set; }
+
+            [JsonProperty("expire_cmd")]
             public string ExpireCommand { get; set; }
         }
 

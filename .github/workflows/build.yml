@@ -1,0 +1,38 @@
+﻿name: Build
+
+on:
+ release:
+  types: [ released ]
+
+jobs:
+  build:
+   name: Build
+   runs-on: ubuntu-latest
+
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+       dotnet-version: '4.2.0'
+
+    - name: Restore NuGet packages
+      run: dotnet restore
+
+    - name: Build Project
+      run: dotnet build
+
+    - name: Zip project
+      run: zip release.zip *.dll fxmanifest.lua
+       
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./release.zip
+        asset_name: 'cosmo-fivem.zip'
+        asset_content_type: application/zip

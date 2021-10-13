@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net452</TargetFramework>
+		<DebugType>embedded</DebugType>
+		<RootNamespace>Cosmo</RootNamespace>
+		<AssemblyName>$(MSBuildProjectName).net</AssemblyName>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="CitizenFX.Core">
+			<HintPath>D:\Game Servers\FiveM\server\citizen\clr2\lib\mono\4.5\CitizenFX.Core.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include=".github\workflows\build.yml" />
+	</ItemGroup>
+
+</Project>

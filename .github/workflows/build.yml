@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore
 
     - name: Build Project
-      run: dotnet build
+      run: dotnet build -o .
 
     - name: Zip project
       run: zip release.zip *.dll fxmanifest.lua

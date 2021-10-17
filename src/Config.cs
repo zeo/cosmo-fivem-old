@@ -2,44 +2,31 @@
 {
     public struct Config
     {
-        public struct DatabaseConfig
-        {
-            public string Host { get; set; }
-            public string Username { get; set; }
-            public string Password {  get; set; }
-            public string Database { get; set; }
-            public uint Port { get; set; }
-        }
-
         /// <summary>
-        /// The server identifier retrieved from the Cosmo management panel
+        /// The URL of the Cosmo instance
         /// </summary>
-        public ulong ServerId { get; set; }
+        public string InstanceUrl { get; set; }
 
         /// <summary>
-        /// The interval at which the plugins checks the database for
+        /// The server token used to make API calls to the instance url
+        /// </summary>
+        public string ServerToken { get; set; }
+
+        /// <summary>
+        /// The interval in seconds at which the plugin checks for
         /// pending orders / expired actions.
         /// </summary>
         public uint FetchInterval { get; set; }
 
-        public DatabaseConfig Database { get; set; }
 
         /// <summary>
         /// The default config
         /// </summary>
         public static Config Default => new Config
         {
-            ServerId = 1,
+            InstanceUrl = "your.domain",
+            ServerToken = "",
             FetchInterval = 60,
-
-            Database = new DatabaseConfig
-            {
-                Host = "localhost",
-                Username = "root",
-                Password = "Password1",
-                Database = "cosmo",
-                Port = 3306,
-            }
         };
     }
 }

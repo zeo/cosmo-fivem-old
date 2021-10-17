@@ -1,12 +1,5 @@
 ﻿{
-  "server_id": 1,
-  "fetch_interval": 60,
-
-  "database": {
-    "host": "localhost",
-    "username": "root",
-    "password": "Password1",
-    "database": "cosmo",
-    "port": 3306
-  }
+  "instance_url": "http://localhost:8000",
+  "server_token": "sometoken",
+  "fetch_interval": 60
 }

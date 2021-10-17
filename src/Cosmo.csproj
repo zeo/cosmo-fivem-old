@@ -10,9 +10,9 @@
 
 	<ItemGroup>
 		<None Include="..\README.md" />
-		<None Include="..\.gitignore"/>
-		<None Include="..\.gitattributes"/>
-		<None Include="..\fxmanifest.lua"/>
+		<None Include="..\.gitignore" />
+		<None Include="..\.gitattributes" />
+		<None Include="..\fxmanifest.lua" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,6 +26,7 @@
 		<Reference Include="Newtonsoft.Json">
 			<HintPath>..\deps\Newtonsoft.Json.dll</HintPath>
 		</Reference>
+		<Reference Include="System.Net.Http" />
 	</ItemGroup>
 
 </Project>

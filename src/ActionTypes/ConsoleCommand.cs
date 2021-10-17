@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Cosmo.Actions
 {
-    public class ConsoleCommand : IAction<ConsoleCommand.ConsoleCommandData>
+    public class ConsoleCommand : IActionType
     {
         public struct ConsoleCommandData
         {
@@ -15,19 +15,25 @@ namespace Cosmo.Actions
             public string ExpireCommand { get; set; }
         }
 
-        public string ActionName => "console_command";
+        public string Name => "console_command";
 
-        public Task Run(ActionPayload<ConsoleCommandData> payload)
+        public Task Run(ActionPayload payload)
         {
-            var command = payload.Data.Command;
+            var data = (ConsoleCommandData)payload.Data;
+            var command = data.Command;
 
             BaseScript.TriggerEvent(command);
 
             return Task.Run(() => { });
         }
 
-        public Task RunExpired(ActionPayload<ConsoleCommandData> payload)
+        public Task RunExpired(ActionPayload payload)
         {
+            var data = (ConsoleCommandData)payload.Data;
+            var command = data.ExpireCommand;
+
+            BaseScript.TriggerEvent(command);
+
             return Task.Run(() => { });
         }
     }

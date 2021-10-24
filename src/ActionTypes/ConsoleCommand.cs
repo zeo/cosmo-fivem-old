@@ -17,7 +17,7 @@ namespace Cosmo.ActionTypes
 
         public string Name => "console_command";
 
-        public async Task Run(ActionPayload payload)
+        public Task Run(ActionPayload payload)
         {
             var obj = (JObject)payload.Data;
             var data = obj.ToObject<ConsoleCommandData>();
@@ -27,15 +27,19 @@ namespace Cosmo.ActionTypes
                 .Replace(":nick", payload.Player.Name);
 
             API.ExecuteCommand(command);
+
+            return Task.FromResult(0);
         }
 
-        public async Task RunExpired(ActionPayload payload)
+        public Task RunExpired(ActionPayload payload)
         {
             var obj = (JObject)payload.Data;
             var data = obj.ToObject<ConsoleCommandData>();
             var command = data.ExpireCommand;
 
             BaseScript.TriggerEvent(command);
+
+            return Task.FromResult(0);
         }
     }
 }

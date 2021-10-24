@@ -18,9 +18,11 @@ namespace Cosmo
 
         public Plugin()
         {
+            var controllerInterface = typeof(IController);
+
             _controllers = Assembly.GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => typeof(IController).IsAssignableFrom(t))
+                .Where(t => controllerInterface.IsAssignableFrom(t) && t != controllerInterface)
                 .Select(t => Activator.CreateInstance(t))
                 .Cast<IController>()
                 .ToList();

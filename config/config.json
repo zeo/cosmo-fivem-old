@@ -1,5 +1,5 @@
 ﻿{
-  "instance_url": "http://localhost:8000",
+  "instance_url": "https://your.domain",
   "server_token": "sometoken",
   "fetch_interval": 60
 }

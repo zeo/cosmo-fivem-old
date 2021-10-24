@@ -1,9 +1,8 @@
-﻿using Cosmo.Actions;
+﻿using CitizenFX.Core;
+using Cosmo.Actions;
 using Cosmo.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -22,8 +21,8 @@ namespace Cosmo.Controllers
         {
             _actionTypes = Assembly.GetExecutingAssembly()
                 .GetTypes()
-                .Where(t => typeof(IActionType).IsAssignableFrom(t))
-                .Select(t => Activator.CreateInstance(t.MakeGenericType()))
+                .Where(t => typeof(IActionType).IsAssignableFrom(t) && t != typeof(IActionType))
+                .Select(t => Activator.CreateInstance(t))
                 .Cast<IActionType>()
                 .ToDictionary(k => k.Name);
         }
@@ -43,7 +42,6 @@ namespace Cosmo.Controllers
         private async Task FetchPending()
         {
             var result = await Http.GetPendingOrdersAndExpiredActions();
-            var tasks = new Task[result.PendingOrders.Count + result.ExpiredActions.Count];
 
             foreach (var order in result.PendingOrders)
             {
@@ -66,10 +64,10 @@ namespace Cosmo.Controllers
                         OrderId = order.Id,
                         PackageName = order.PackageName,
                         SteamId = action.Receiver,
-                        Data = JsonConvert.DeserializeObject(action.Data)
+                        Data = action.Data
                     };
 
-                    tasks[tasks.Length] = actionType.Run(payload);
+                    await actionType.Run(payload);
 
                     await Http.CompleteAction(action.Id);
                 }
@@ -90,13 +88,13 @@ namespace Cosmo.Controllers
                     OrderId = 1,
                     PackageName = action.Order.Value!.PackageName,
                     SteamId = action.Receiver,
-                    Data = JsonConvert.DeserializeObject(action.Data)
+                    Data = action.Data
                 };
 
-                tasks[tasks.Length] = actionType.RunExpired(payload);
-            }
+                await actionType.RunExpired(payload);
 
-            await Task.WhenAll(tasks);
+                await Http.ExpireAction(action.Id);
+            }
         }
     }
 }

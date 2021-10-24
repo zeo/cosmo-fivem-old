@@ -5,7 +5,7 @@
         public ulong Id { get; set; }
         public string Name { get; set; }
         public string Receiver { get; set; }
-        public string Data { get; set; }
+        public object Data { get; set; }
 
 #nullable enable
         public Order? Order { get; set; }

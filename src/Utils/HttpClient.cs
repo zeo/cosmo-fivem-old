@@ -1,4 +1,5 @@
-﻿using Cosmo.Models;
+﻿using CitizenFX.Core;
+using Cosmo.Models;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -15,13 +16,14 @@ namespace Cosmo.Utils
         public HttpClient(Config config)
         {
             _client = new System.Net.Http.HttpClient();
-            _client.BaseAddress = new Uri(config.InstanceUrl + "/api/game");
+            _client.BaseAddress = new Uri(config.InstanceUrl + "/api/game/");
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", config.ServerToken);
+            _client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
         }
 
         public async Task<PendingOrdersExpiredActions> GetPendingOrdersAndExpiredActions()
         {
-            var response = await _client.GetAsync("/store/pending");
+            var response = await _client.GetAsync("store/pending");
             var data = await ParseResponse<PendingOrdersExpiredActions>(response);
 
             return data;
@@ -29,21 +31,21 @@ namespace Cosmo.Utils
 
         public async Task<bool> CompleteAction(ulong actionId)
         {
-            var response = await _client.PutAsync("/store/actions/" + actionId + "/complete", null);
-            
+            var response = await _client.PutAsync("store/actions/" + actionId + "/complete", null);
+
             return response.StatusCode == HttpStatusCode.NoContent;
         }
 
         public async Task<bool> ExpireAction(ulong actionId)
         {
-            var response = await _client.PutAsync("/store/actions/" + actionId + "/expire", null);
+            var response = await _client.PutAsync("store/actions/" + actionId + "/expire", null);
 
             return response.StatusCode == HttpStatusCode.NoContent;
         }
 
         public async Task<bool> DeliverOrder(ulong orderId)
         {
-            var response = await _client.PutAsync("/store/orders/" + orderId + "/deliver", null);
+            var response = await _client.PutAsync("store/orders/" + orderId + "/deliver", null);
 
             return response.StatusCode == HttpStatusCode.NoContent;
         }

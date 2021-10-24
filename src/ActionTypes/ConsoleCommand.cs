@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using CitizenFX.Core;
+using CitizenFX.Core.Native;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Cosmo.Actions
+namespace Cosmo.ActionTypes
 {
     public class ConsoleCommand : IActionType
     {
@@ -20,9 +21,12 @@ namespace Cosmo.Actions
         {
             var obj = (JObject)payload.Data;
             var data = obj.ToObject<ConsoleCommandData>();
-            var command = data.Command;
 
-            BaseScript.TriggerEvent(command);
+            var command = data.Command
+                .Replace(":sid64", payload.SteamId)
+                .Replace(":nick", payload.Player.Name);
+
+            API.ExecuteCommand(command);
         }
 
         public async Task RunExpired(ActionPayload payload)

@@ -16,8 +16,14 @@ namespace Cosmo
 
         private Config Config { get; set; }
 
+        public static Plugin Instance { get; private set; }
+
+        public PlayerList PlayerList => Players;
+
         public Plugin()
         {
+            Instance = this;
+
             var controllerInterface = typeof(IController);
 
             _controllers = Assembly.GetExecutingAssembly()

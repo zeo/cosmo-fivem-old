@@ -1,5 +1,7 @@
 ﻿using CitizenFX.Core;
 using Cosmo.Actions;
+using Cosmo.ActionTypes;
+using Cosmo.Extensions;
 using Cosmo.Utils;
 using System;
 using System.Collections.Generic;
@@ -59,11 +61,20 @@ namespace Cosmo.Controllers
                         continue;
                     }
 
+                    // Find player
+                    var player = Plugin.Instance.PlayerList.FirstOrDefault(p => p.GetSteamId() == action.Receiver);
+                    if (player == null)
+                    {
+                        Debug.WriteLine("Player is not online, skipping action");
+                        continue;
+                    }
+
                     var payload = new ActionPayload
                     {
                         OrderId = order.Id,
                         PackageName = order.PackageName,
                         SteamId = action.Receiver,
+                        Player = player,
                         Data = action.Data
                     };
 

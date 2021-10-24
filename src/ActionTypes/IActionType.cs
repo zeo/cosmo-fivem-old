@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Cosmo.Actions
+namespace Cosmo.ActionTypes
 {
     public interface IActionType
     {

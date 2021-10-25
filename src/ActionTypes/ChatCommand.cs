@@ -1,6 +1,5 @@
 ﻿using CitizenFX.Core;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
 namespace Cosmo.ActionTypes
@@ -18,8 +17,7 @@ namespace Cosmo.ActionTypes
 
         public Task Run(ActionPayload payload)
         {
-            var obj = (JObject)payload.Data;
-            var data = obj.ToObject<ChatCommandData>();
+            var data = payload.Data.ToObject<ChatCommandData>();
 
             BaseScript.TriggerEvent("chat:addMessage", new
             {
@@ -31,8 +29,7 @@ namespace Cosmo.ActionTypes
 
         public Task RunExpired(ActionPayload payload)
         {
-            var obj = (JObject)payload.Data;
-            var data = obj.ToObject<ChatCommandData>();
+            var data = payload.Data.ToObject<ChatCommandData>();
 
             BaseScript.TriggerEvent("chat:addMessage", new
             {

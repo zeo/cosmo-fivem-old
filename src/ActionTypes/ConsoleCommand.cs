@@ -2,7 +2,6 @@
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Cosmo.ActionTypes
 {
@@ -19,8 +18,7 @@ namespace Cosmo.ActionTypes
 
         public Task Run(ActionPayload payload)
         {
-            var obj = (JObject)payload.Data;
-            var data = obj.ToObject<ConsoleCommandData>();
+            var data = payload.Data.ToObject<ConsoleCommandData>();
 
             var command = data.Command
                 .Replace(":sid64", payload.SteamId)
@@ -33,9 +31,11 @@ namespace Cosmo.ActionTypes
 
         public Task RunExpired(ActionPayload payload)
         {
-            var obj = (JObject)payload.Data;
-            var data = obj.ToObject<ConsoleCommandData>();
-            var command = data.ExpireCommand;
+            var data = payload.Data.ToObject<ConsoleCommandData>();
+
+            var command = data.ExpireCommand
+                .Replace(":sid64", payload.SteamId)
+                .Replace(":nick", payload.Player.Name);
 
             BaseScript.TriggerEvent(command);
 

@@ -1,4 +1,5 @@
 ﻿using CitizenFX.Core;
+using Newtonsoft.Json.Linq;
 
 namespace Cosmo.ActionTypes
 {
@@ -8,6 +9,6 @@ namespace Cosmo.ActionTypes
         public string PackageName { get; set; }
         public Player Player { get; set; }
         public string SteamId { get; set; }
-        public object Data { get; set; }
+        public JObject Data { get; set; } // Only JObject temporarily until payloads get refactored.
     }
 }

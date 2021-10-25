@@ -1,6 +1,5 @@
 ﻿using CitizenFX.Core;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
 namespace Cosmo.ActionTypes
@@ -16,8 +15,7 @@ namespace Cosmo.ActionTypes
 
         public Task Run(ActionPayload payload)
         {
-            var obj = (JObject)payload.Data;
-            var data = obj.ToObject<EventTriggerData>();
+            var data = payload.Data.ToObject<EventTriggerData>();
 
             BaseScript.TriggerEvent(data.Event);
 
@@ -26,8 +24,7 @@ namespace Cosmo.ActionTypes
 
         public Task RunExpired(ActionPayload payload)
         {
-            var obj = (JObject)payload.Data;
-            var data = obj.ToObject<EventTriggerData>();
+            var data = payload.Data.ToObject<EventTriggerData>();
 
             BaseScript.TriggerEvent(data.Event);
 
